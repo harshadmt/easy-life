@@ -15,6 +15,7 @@ import {
   Sparkles,
   TrendingUp,
   ShieldCheck,
+  Users,
 } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -42,6 +43,38 @@ export default function BenefitsPage() {
           <p className="text-base sm:text-xl text-[#b0f0d6] max-w-2xl mx-auto mt-4">
             Explore the diverse range of foundational advantages and high-tier rewards designed to support your personal and professional evolution.
           </p>
+        </div>
+      </section>
+
+      {/* 10-MEMBER GROUP GROWTH SPOTLIGHT BANNER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20 w-full">
+        <div className="bg-gradient-to-r from-[#003527] via-[#064e3b] to-[#003527] rounded-3xl p-6 sm:p-10 text-white shadow-2xl border-2 border-[#fea619] relative overflow-hidden card-shadow-hover">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#fea619]/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+            <div className="space-y-2.5 max-w-3xl">
+              <div className="inline-flex items-center gap-2 bg-[#ffddb8] text-[#855300] px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider">
+                <Users className="w-3.5 h-3.5" />
+                <span>10-Member Team Structure • ഗ്രൂപ്പ് വളർച്ച</span>
+              </div>
+              <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+                ഗ്രൂപ്പ് അടിസ്ഥാനത്തിലുള്ള വളർച്ച
+              </h2>
+              <p className="text-sm sm:text-base text-[#b0f0d6] font-medium leading-relaxed">
+                10 പേർ അടങ്ങുന്ന ഗ്രൂപ്പുകളുടെ അടിസ്ഥാനത്തിൽ അംഗങ്ങൾക്ക് Easy Life Manager Programme-ലേക്ക് എത്തിച്ചേരാനുള്ള അവസരം ലഭിക്കുന്നു. ഓരോ ഘട്ടത്തിലും പുതിയ നേട്ടങ്ങളിലേക്കും ആനുകൂല്യങ്ങളിലേക്കും മുന്നേറാം.
+              </p>
+            </div>
+
+            <div className="shrink-0 w-full sm:w-auto">
+              <Link
+                href="/register?plan=1000_membership"
+                className="inline-flex items-center justify-center gap-2 bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-md transition-all w-full sm:w-auto"
+              >
+                <span>Join & Form Your Group</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

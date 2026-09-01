@@ -399,7 +399,7 @@ export default function HomePage() {
                   className="bg-[#f8f9fa] border border-[#e1e3e4] rounded-2xl overflow-hidden hover:border-[#fea619] transition-all duration-300 card-shadow-hover flex flex-col justify-between group h-full shimmer-card"
                 >
                   <div>
-                    <div className="h-48 w-full bg-white relative overflow-hidden flex items-center justify-center p-2">
+                    <div className="h-60 sm:h-64 w-full bg-white relative overflow-hidden flex items-center justify-center p-3 border-b border-[#e7e8e9]">
                       <img
                         src={product.imageUrl}
                         alt={product.name}
@@ -493,10 +493,40 @@ export default function HomePage() {
             ))}
           </div>
 
+          {/* 10-Member Team Malayalam Callout */}
+          <ScrollReveal direction="up" delay={200} className="mt-12">
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e1e3e4] card-shadow flex flex-col md:flex-row items-center justify-between gap-6 max-w-4xl mx-auto">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#003527] text-[#fea619] flex items-center justify-center shrink-0">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#855300]">
+                    ഗ്രൂപ്പ് വളർച്ച • 10-Member Team Pathway
+                  </span>
+                  <h3 className="font-heading font-bold text-lg sm:text-xl text-[#003527]">
+                    ഗ്രൂപ്പ് അടിസ്ഥാനത്തിലുള്ള വളർച്ച
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#404944] leading-relaxed">
+                    10 പേർ അടങ്ങുന്ന ഗ്രൂപ്പുകളുടെ അടിസ്ഥാനത്തിൽ അംഗങ്ങൾക്ക് Easy Life Manager Programme-ലേക്ക് എത്തിച്ചേരാനുള്ള അവസരം ലഭിക്കുന്നു. ഓരോ ഘട്ടത്തിലും പുതിയ നേട്ടങ്ങളിലേക്കും ആനുകൂല്യങ്ങളിലേക്കും മുന്നേറാം.
+                  </p>
+                </div>
+              </div>
+
+              <Link
+                href="/benefits"
+                className="inline-flex items-center gap-2 bg-[#003527] text-white font-bold text-xs sm:text-sm px-5 py-3 rounded-xl hover:bg-[#064e3b] transition-colors shrink-0 whitespace-nowrap shadow-sm"
+              >
+                <span>Learn Details</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </ScrollReveal>
+
           <div className="text-center mt-10">
             <Link
               href="/benefits"
-              className="inline-flex items-center gap-2 bg-[#003527] text-white font-bold text-sm px-6 py-3 rounded-xl hover:bg-[#064e3b] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold text-sm px-7 py-3.5 rounded-xl shadow-md transition-all"
             >
               <span>Explore All Benefits & Rewards</span>
               <ArrowRight className="w-4 h-4" />
@@ -526,14 +556,13 @@ export default function HomePage() {
               >
                 Join Now Online
               </Link>
-              <a
-                href={SITE_INFO.whatsappGroupLink}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/register"
                 className="bg-transparent border-2 border-white hover:bg-white hover:text-[#003527] text-white font-bold text-base px-8 py-4 rounded-xl transition-all flex items-center gap-2 hover:scale-105 active:scale-95"
               >
                 <span>Join WhatsApp Group</span>
-              </a>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>

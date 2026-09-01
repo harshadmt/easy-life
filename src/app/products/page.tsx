@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PRODUCTS_LIST, Product, SITE_INFO } from '@/data/siteData';
@@ -32,6 +33,29 @@ export default function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll and handle ESC key when modal is open
+  useEffect(() => {
+    if (selectedProduct) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') setSelectedProduct(null);
+      };
+
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = originalStyle || 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [selectedProduct]);
 
   const filteredProducts = PRODUCTS_LIST.filter((p) => {
     const matchesCategory =
@@ -161,18 +185,22 @@ export default function ProductsPage() {
                 className="bg-white border border-[#e1e3e4] rounded-3xl overflow-hidden card-shadow-hover flex flex-col justify-between group hover:border-[#80bea6] shimmer-card"
               >
                 <div>
-                  {/* Image Container */}
-                  <div className="h-64 w-full bg-[#f3f4f5] relative overflow-hidden">
+                  {/* Image Container (Clickable) */}
+                  <div
+                    onClick={() => setSelectedProduct(product)}
+                    className="h-72 w-full bg-[#f8f9fa] relative overflow-hidden flex items-center justify-center p-3 border-b border-[#e7e8e9] cursor-pointer group/img"
+                    title={`Click to view details for ${product.name}`}
+                  >
                     <img
                       src={product.imageUrl}
                       alt={product.name}
-                      className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-500 bg-white"
+                      className="max-h-full max-w-full object-contain group-hover/img:scale-108 transition-transform duration-500 rounded-lg"
                     />
                     <div className="absolute top-3 right-3 bg-[#003527] text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md">
                       {product.badge}
                     </div>
                     {product.mrp && (
-                      <div className="absolute bottom-3 left-3 bg-[#003527]/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg border border-white/20">
+                      <div className="absolute bottom-3 left-3 bg-[#003527]/90 text-white text-[11px] font-bold px-2.5 py-1 rounded-lg border border-white/20 shadow-sm">
                         MRP: {product.mrp}
                       </div>
                     )}
@@ -184,7 +212,10 @@ export default function ProductsPage() {
                       {product.category}
                     </span>
 
-                    <h3 className="font-heading font-bold text-lg sm:text-xl text-[#003527] group-hover:text-[#064e3b] transition-colors leading-snug">
+                    <h3
+                      onClick={() => setSelectedProduct(product)}
+                      className="font-heading font-bold text-lg sm:text-xl text-[#003527] group-hover:text-[#855300] transition-colors leading-snug cursor-pointer"
+                    >
                       {product.name}
                     </h3>
 
@@ -242,104 +273,115 @@ export default function ProductsPage() {
         )}
       </section>
 
-      {/* QUICK VIEW MODAL */}
-      {selectedProduct && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e1e3e4] shadow-2xl relative">
-            <button
-              onClick={() => setSelectedProduct(null)}
-              aria-label="Close modal"
-              className="absolute top-4 right-4 z-10 p-2 bg-white/90 rounded-full hover:bg-[#e7e8e9] transition-colors"
+      {/* QUICK VIEW MODAL (Rendered directly in Portal at body level) */}
+      {mounted &&
+        selectedProduct &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[99999] bg-black/75 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 overflow-y-auto animate-fade-in"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setSelectedProduct(null);
+            }}
+          >
+            <div
+              className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e1e3e4] shadow-2xl relative my-auto animate-modal-in"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="w-5 h-5 text-[#191c1d]" />
-            </button>
+              <button
+                onClick={() => setSelectedProduct(null)}
+                aria-label="Close modal"
+                className="absolute top-4 right-4 z-10 p-2 bg-white/95 rounded-full hover:bg-[#e7e8e9] transition-colors shadow-md border border-[#e1e3e4]"
+              >
+                <X className="w-5 h-5 text-[#191c1d]" />
+              </button>
 
-            <div className="relative h-72 sm:h-80 w-full bg-white flex items-center justify-center border-b border-[#e1e3e4] p-4">
-              <img
-                src={selectedProduct.imageUrl}
-                alt={selectedProduct.name}
-                className="max-h-full max-w-full object-contain"
-              />
-              <div className="absolute top-4 left-4">
-                <span className="text-xs bg-[#003527] text-white font-bold px-3 py-1 rounded-full uppercase">
-                  {selectedProduct.badge}
-                </span>
+              <div className="relative h-72 sm:h-80 w-full bg-[#f8f9fa] flex items-center justify-center border-b border-[#e1e3e4] p-4">
+                <img
+                  src={selectedProduct.imageUrl}
+                  alt={selectedProduct.name}
+                  className="max-h-full max-w-full object-contain rounded-xl"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="text-xs bg-[#003527] text-white font-bold px-3 py-1 rounded-full uppercase shadow-sm">
+                    {selectedProduct.badge}
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-6">
+                <div>
+                  <span className="text-xs font-bold text-[#855300] uppercase tracking-wider block">
+                    {selectedProduct.category}
+                  </span>
+                  <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#003527] mt-1">
+                    {selectedProduct.name}
+                  </h3>
+                  {selectedProduct.malayalamName && (
+                    <p className="text-sm font-semibold text-[#855300] mt-1">
+                      {selectedProduct.malayalamName}
+                    </p>
+                  )}
+                </div>
+
+                {/* Pricing Cards */}
+                <div className="grid grid-cols-3 gap-3 p-4 bg-[#f8f9fa] rounded-2xl border border-[#e7e8e9] text-center">
+                  {selectedProduct.mrp && (
+                    <div>
+                      <span className="text-[10px] text-[#707974] block uppercase">MRP</span>
+                      <span className="text-lg font-bold text-[#191c1d] font-heading">{selectedProduct.mrp}</span>
+                    </div>
+                  )}
+                  {selectedProduct.dp && (
+                    <div>
+                      <span className="text-[10px] text-[#707974] block uppercase">DP (Distributor)</span>
+                      <span className="text-lg font-bold text-[#003527] font-heading">{selectedProduct.dp}</span>
+                    </div>
+                  )}
+                  {selectedProduct.sp && (
+                    <div>
+                      <span className="text-[10px] text-[#707974] block uppercase">SP Points</span>
+                      <span className="text-lg font-bold text-[#855300] font-heading">{selectedProduct.sp}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <h4 className="font-heading font-bold text-base text-[#003527] mb-2">Description</h4>
+                  <p className="text-sm text-[#404944] leading-relaxed">{selectedProduct.description}</p>
+                </div>
+
+                <div>
+                  <h4 className="font-heading font-bold text-base text-[#003527] mb-3">Package Contents & Features</h4>
+                  <ul className="space-y-2">
+                    {selectedProduct.features.map((feat, idx) => (
+                      <li key={idx} className="flex items-center gap-2.5 text-sm text-[#191c1d]">
+                        <CheckCircle2 className="w-4 h-4 text-[#fea619] shrink-0" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="pt-4 border-t border-[#e7e8e9] flex flex-col sm:flex-row gap-3">
+                  <Link
+                    href={`/register?product=${encodeURIComponent(selectedProduct.name)}`}
+                    className="flex-1 bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold py-3.5 px-6 rounded-xl text-center shadow-md transition-all flex items-center justify-center gap-2"
+                  >
+                    <span>Register & Order This Package</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <button
+                    onClick={() => setSelectedProduct(null)}
+                    className="px-6 py-3.5 bg-[#f3f4f5] hover:bg-[#e7e8e9] text-[#191c1d] font-semibold text-sm rounded-xl transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
-
-            <div className="p-6 sm:p-8 space-y-6">
-              <div>
-                <span className="text-xs font-bold text-[#855300] uppercase tracking-wider block">
-                  {selectedProduct.category}
-                </span>
-                <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#003527] mt-1">
-                  {selectedProduct.name}
-                </h3>
-                {selectedProduct.malayalamName && (
-                  <p className="text-sm font-semibold text-[#855300] mt-1">
-                    {selectedProduct.malayalamName}
-                  </p>
-                )}
-              </div>
-
-              {/* Pricing Cards */}
-              <div className="grid grid-cols-3 gap-3 p-4 bg-[#f8f9fa] rounded-2xl border border-[#e7e8e9] text-center">
-                {selectedProduct.mrp && (
-                  <div>
-                    <span className="text-[10px] text-[#707974] block uppercase">MRP</span>
-                    <span className="text-lg font-bold text-[#191c1d] font-heading">{selectedProduct.mrp}</span>
-                  </div>
-                )}
-                {selectedProduct.dp && (
-                  <div>
-                    <span className="text-[10px] text-[#707974] block uppercase">DP (Distributor)</span>
-                    <span className="text-lg font-bold text-[#003527] font-heading">{selectedProduct.dp}</span>
-                  </div>
-                )}
-                {selectedProduct.sp && (
-                  <div>
-                    <span className="text-[10px] text-[#707974] block uppercase">SP Points</span>
-                    <span className="text-lg font-bold text-[#855300] font-heading">{selectedProduct.sp}</span>
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <h4 className="font-heading font-bold text-base text-[#003527] mb-2">Description</h4>
-                <p className="text-sm text-[#404944] leading-relaxed">{selectedProduct.description}</p>
-              </div>
-
-              <div>
-                <h4 className="font-heading font-bold text-base text-[#003527] mb-3">Package Contents & Features</h4>
-                <ul className="space-y-2">
-                  {selectedProduct.features.map((feat, idx) => (
-                    <li key={idx} className="flex items-center gap-2.5 text-sm text-[#191c1d]">
-                      <CheckCircle2 className="w-4 h-4 text-[#fea619] shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-4 border-t border-[#e7e8e9] flex flex-col sm:flex-row gap-3">
-                <Link
-                  href={`/register?product=${encodeURIComponent(selectedProduct.name)}`}
-                  className="flex-1 bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold py-3.5 px-6 rounded-xl text-center shadow-md transition-all flex items-center justify-center gap-2"
-                >
-                  <span>Register & Order This Package</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-                <button
-                  onClick={() => setSelectedProduct(null)}
-                  className="px-6 py-3.5 bg-[#f3f4f5] hover:bg-[#e7e8e9] text-[#191c1d] font-semibold text-sm rounded-xl transition-colors"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 }

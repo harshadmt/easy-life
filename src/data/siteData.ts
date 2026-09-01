@@ -611,6 +611,30 @@ export const PRODUCTS_LIST: Product[] = [
     ],
     imageUrl: '/mens_plus.JPG',
   },
+  {
+    id: 'prod-22',
+    name: 'Asclepius KABZDOC Granules (Digestive Health & Constipation Relief)',
+    malayalamName: 'അസ്ക്ലെപിയസ് കബ്സ്ഡോക് ഗ്രാനുൾസ് (മലബന്ധത്തിനും ദഹനത്തിനും ശാശ്വത പരിഹാരം)',
+    category: 'Health & Wellness',
+    mrp: '₹189',
+    dp: '₹150',
+    sp: '0.50 SP',
+    weight: '100g',
+    value: '₹189',
+    price: '₹150',
+    group: 'All Members & Starter Packages',
+    delivery: 'Express Courier (Doorstep)',
+    badge: 'Digestive & Constipation Care',
+    description: 'മലബന്ധത്തിനും ദഹനപ്രശ്നങ്ങൾക്കും ശാശ്വത പരിഹാരം നൽകുന്ന ആയുർവേദ ഗ്രാനുൾസ്. വിട്ടുമാറാത്ത മലബന്ധം (Chronic Constipation), അസിഡിറ്റി, ഗ്യാസ്, നെഞ്ചെരിച്ചിൽ, വയറിലെ പുകച്ചിൽ എന്നിവയ്ക്ക് വേഗത്തിലുള്ള ആശ്വാസം നൽകി ദഹനപ്രക്രിയ സുഗമമാക്കുന്നു. GMP & ISO 9001:2015 Certified.',
+    features: [
+      'മലബന്ധത്തിന് ശാശ്വത പരിഹാരം: വിട്ടുമാറാത്ത മലബന്ധവും (Chronic Constipation) ദഹനക്കുറവും മാറ്റുന്നു',
+      'അസിഡിറ്റിയും ഗ്യാസും കുറയ്ക്കുന്നു: നെഞ്ചെരിച്ചിൽ, വയറുവേദന, ഗ്യാസ്ട്രിക് എന്നിവയ്ക്ക് ആശ്വാസം',
+      'അനുബന്ധ പ്രശ്നങ്ങൾ തടയുന്നു: തലവേദന, വയറിലെ പുകച്ചിൽ, അസ്വസ്ഥത എന്നിവ ശമിപ്പിക്കുന്നു',
+      'ദഹനപ്രക്രിയ മെച്ചപ്പെടുത്തുന്നു: കുടലിന്റെ പ്രവർത്തനം സുഗമമാക്കുന്നു',
+      '100g Granules Bottle | GMP & ISO 9001:2015 Certified Formulation',
+    ],
+    imageUrl: '/kabzedok.png',
+  },
 
   /* 5. COMMUNITY & SOLAR INITIATIVES */
   {

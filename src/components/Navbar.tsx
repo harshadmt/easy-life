@@ -54,15 +54,13 @@ export default function Navbar() {
               <span>{SITE_INFO.email}</span>
             </a>
             <span className="text-white/40 hidden md:inline">|</span>
-            <a
-              href={SITE_INFO.whatsappGroupLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/register"
               className="text-[#fea619] hover:underline font-bold flex items-center gap-1"
             >
               <MessageSquare className="w-3 h-3" />
               <span>Join WhatsApp Group</span>
-            </a>
+            </Link>
             <span className="text-white/40 hidden sm:inline">|</span>
             <a
               href={`tel:${SITE_INFO.phone}`}
@@ -122,15 +120,13 @@ export default function Navbar() {
 
           {/* Action CTAs */}
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href={SITE_INFO.whatsappGroupLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/register"
               className="bg-[#c3ecd7]/60 hover:bg-[#c3ecd7] text-[#003527] border border-[#80bea6] font-bold text-xs px-3.5 py-2.5 rounded-lg transition-colors flex items-center gap-1.5"
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#064e3b]" />
               <span>WhatsApp Group</span>
-            </a>
+            </Link>
             <Link
               href="/register"
               className="bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold text-sm px-5 py-2.5 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-1.5 group"
@@ -190,14 +186,13 @@ export default function Navbar() {
               <span>Get Started & Register</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <a
-              href={SITE_INFO.whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/register"
               className="w-full bg-[#064e3b] text-white font-medium py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2 text-sm"
             >
-              <span>Chat on WhatsApp</span>
-            </a>
+              <MessageSquare className="w-4 h-4 text-[#fea619]" />
+              <span>Join WhatsApp Group (Register)</span>
+            </Link>
           </div>
         </div>
       )}
