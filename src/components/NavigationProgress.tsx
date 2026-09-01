@@ -10,19 +10,15 @@ export default function NavigationProgress() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // When path or query params change, start silky smooth progress sequence
+    // When path or query params change, start minimal top bar indicator
     setVisible(true);
-    setProgress(15);
+    setProgress(30);
 
-    const step1 = setTimeout(() => {
-      setProgress(45);
-    }, 80);
+    const timer1 = setTimeout(() => {
+      setProgress(70);
+    }, 60);
 
-    const step2 = setTimeout(() => {
-      setProgress(85);
-    }, 180);
-
-    const step3 = setTimeout(() => {
+    const timer2 = setTimeout(() => {
       setProgress(100);
       const finishTimer = setTimeout(() => {
         setVisible(false);
@@ -30,14 +26,13 @@ export default function NavigationProgress() {
           setProgress(0);
         }, 150);
         return () => clearTimeout(resetTimer);
-      }, 250);
+      }, 200);
       return () => clearTimeout(finishTimer);
-    }, 320);
+    }, 180);
 
     return () => {
-      clearTimeout(step1);
-      clearTimeout(step2);
-      clearTimeout(step3);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
     };
   }, [pathname, searchParams]);
 
@@ -45,24 +40,20 @@ export default function NavigationProgress() {
 
   return (
     <div
-      className="fixed top-0 left-0 right-0 z-[9999] h-[3.5px] pointer-events-none overflow-visible"
+      className="fixed top-0 left-0 right-0 z-[9999] h-[2.5px] pointer-events-none overflow-hidden"
       style={{
         opacity: visible ? 1 : 0,
-        transition: 'opacity 250ms ease-out',
+        transition: 'opacity 200ms ease-out',
       }}
     >
-      {/* Background Track */}
-      <div className="absolute inset-0 bg-transparent" />
-
-      {/* Animated Glowing Progress Bar */}
       <div
-        className="h-full bg-gradient-to-r from-[#003527] via-[#fea619] to-[#ffbe4d] transition-all duration-300 ease-out relative"
+        className="h-full bg-gradient-to-r from-[#003527] via-[#fea619] to-[#80bea6] transition-all duration-200 ease-out relative"
         style={{
           width: `${progress}%`,
+          boxShadow: '0 0 8px rgba(254, 166, 25, 0.9), 0 0 3px rgba(0, 53, 39, 0.6)',
         }}
       >
-        {/* Leading edge glowing spark */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-3 bg-white/80 rounded-full blur-xs shadow-[0_0_12px_#fea619,0_0_20px_#fea619]" />
+        <div className="absolute right-0 top-0 bottom-0 w-6 bg-white/70 blur-[1px]" />
       </div>
     </div>
   );
