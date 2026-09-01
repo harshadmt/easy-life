@@ -64,6 +64,15 @@ export const SITE_INFO = {
   email: 'easylifemanager11@gmail.com',
   address: 'Sayana Charitable Society Headquarters, 100 Stability Plaza, Ernakulam, Kerala - 682001',
   regNumber: 'S-784/2018 (Registered Charitable Society)',
+  bankDetails: {
+    bank: 'Indian Bank',
+    accountName: 'Bhadran S',
+    accountNumber: '8352163580',
+    ifscCode: 'IDIB000S011',
+    branch: 'Sasthamkotta',
+    branchCode: '00268',
+    upiId: 'bhadran8352163580@indianbk',
+  },
 };
 
 export const NAV_LINKS = [

@@ -13,6 +13,10 @@ import {
   Building2,
   PhoneCall,
   ExternalLink,
+  Building,
+  Copy,
+  Check,
+  ShieldCheck,
 } from 'lucide-react';
 
 export default function ContactPage() {
@@ -25,6 +29,27 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [copiedAcc, setCopiedAcc] = useState(false);
+  const [copiedIfsc, setCopiedIfsc] = useState(false);
+  const [copiedUpi, setCopiedUpi] = useState(false);
+
+  const handleCopyAcc = () => {
+    navigator.clipboard.writeText(SITE_INFO.bankDetails.accountNumber);
+    setCopiedAcc(true);
+    setTimeout(() => setCopiedAcc(false), 2500);
+  };
+
+  const handleCopyIfsc = () => {
+    navigator.clipboard.writeText(SITE_INFO.bankDetails.ifscCode);
+    setCopiedIfsc(true);
+    setTimeout(() => setCopiedIfsc(false), 2500);
+  };
+
+  const handleCopyUpi = () => {
+    navigator.clipboard.writeText(SITE_INFO.bankDetails.upiId);
+    setCopiedUpi(true);
+    setTimeout(() => setCopiedUpi(false), 2500);
+  };
 
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -167,6 +192,89 @@ export default function ContactPage() {
                   <MessageSquare className="w-4 h-4" />
                   <span>WhatsApp Group</span>
                 </a>
+              </div>
+            </div>
+
+            {/* Official Society Bank Account Card */}
+            <div className="bg-white border-2 border-[#fea619] rounded-3xl p-6 sm:p-8 card-shadow-hover space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-[#e7e8e9]">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#003527] text-[#fea619] flex items-center justify-center font-bold">
+                    <Building className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-bold text-lg text-[#003527]">
+                      Official Bank Account
+                    </h3>
+                    <p className="text-[11px] text-[#707974]">
+                      Direct Transfer & NEFT / IMPS Credentials
+                    </p>
+                  </div>
+                </div>
+                <span className="bg-[#c3ecd7] text-[#003527] px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase">
+                  Verified
+                </span>
+              </div>
+
+              <div className="space-y-3 text-xs">
+                <div className="flex justify-between items-center py-1 border-b border-[#f3f4f5]">
+                  <span className="text-[#707974]">Bank:</span>
+                  <span className="font-bold text-[#003527] text-sm">{SITE_INFO.bankDetails.bank}</span>
+                </div>
+
+                <div className="flex justify-between items-center py-1 border-b border-[#f3f4f5]">
+                  <span className="text-[#707974]">Account Holder:</span>
+                  <span className="font-bold text-[#191c1d]">{SITE_INFO.bankDetails.accountName}</span>
+                </div>
+
+                <div className="flex justify-between items-center bg-[#f8f9fa] p-3 rounded-xl border border-[#e1e3e4]">
+                  <div>
+                    <span className="text-[10px] text-[#707974] block uppercase">Account Number</span>
+                    <span className="font-mono font-extrabold text-sm text-[#003527]">{SITE_INFO.bankDetails.accountNumber}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyAcc}
+                    className="text-xs bg-[#003527] hover:bg-[#064e3b] text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors"
+                  >
+                    {copiedAcc ? <Check className="w-3.5 h-3.5 text-[#fea619]" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedAcc ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+
+                <div className="flex justify-between items-center bg-[#f8f9fa] p-3 rounded-xl border border-[#e1e3e4]">
+                  <div>
+                    <span className="text-[10px] text-[#707974] block uppercase">IFSC Code</span>
+                    <span className="font-mono font-extrabold text-sm text-[#855300]">{SITE_INFO.bankDetails.ifscCode}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleCopyIfsc}
+                    className="text-xs bg-[#003527] hover:bg-[#064e3b] text-white px-3 py-1.5 rounded-lg flex items-center gap-1 transition-colors"
+                  >
+                    {copiedIfsc ? <Check className="w-3.5 h-3.5 text-[#fea619]" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedIfsc ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+
+                <div className="flex justify-between items-center py-1 border-b border-[#f3f4f5]">
+                  <span className="text-[#707974]">Branch:</span>
+                  <span className="font-semibold text-[#191c1d]">{SITE_INFO.bankDetails.branch} (Code: {SITE_INFO.bankDetails.branchCode})</span>
+                </div>
+
+                <div className="flex justify-between items-center py-1">
+                  <span className="text-[#707974]">UPI ID:</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-xs text-[#003527]">{SITE_INFO.bankDetails.upiId}</span>
+                    <button
+                      type="button"
+                      onClick={handleCopyUpi}
+                      className="text-xs text-[#855300] hover:underline flex items-center gap-0.5"
+                    >
+                      {copiedUpi ? <span>✓</span> : <span>Copy</span>}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 

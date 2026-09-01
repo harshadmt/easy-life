@@ -18,6 +18,9 @@ import {
   ArrowRight,
   Sparkles,
   PhoneCall,
+  Building,
+  CreditCard,
+  Wallet,
 } from 'lucide-react';
 
 const INTEREST_OPTIONS = [
@@ -48,10 +51,13 @@ function RegisterFormContent() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'bank'>('upi');
   const [copiedUpi, setCopiedUpi] = useState(false);
+  const [copiedAcc, setCopiedAcc] = useState(false);
+  const [copiedIfsc, setCopiedIfsc] = useState(false);
   const [refNumber, setRefNumber] = useState('ELM-84920');
 
-  const UPI_ID = 'bhadran8352163580@indianbk';
+  const UPI_ID = SITE_INFO.bankDetails.upiId;
   const ADMIN_WHATSAPP = '918075028292';
 
   useEffect(() => {
@@ -65,6 +71,18 @@ function RegisterFormContent() {
     navigator.clipboard.writeText(UPI_ID);
     setCopiedUpi(true);
     setTimeout(() => setCopiedUpi(false), 2500);
+  };
+
+  const handleCopyAcc = () => {
+    navigator.clipboard.writeText(SITE_INFO.bankDetails.accountNumber);
+    setCopiedAcc(true);
+    setTimeout(() => setCopiedAcc(false), 2500);
+  };
+
+  const handleCopyIfsc = () => {
+    navigator.clipboard.writeText(SITE_INFO.bankDetails.ifscCode);
+    setCopiedIfsc(true);
+    setTimeout(() => setCopiedIfsc(false), 2500);
   };
 
   const constructRegistrationMessage = (ref: string) => {
@@ -211,62 +229,163 @@ function RegisterFormContent() {
               </div>
             </div>
 
-            {/* RIGHT COL: QR CODE PAYMENT & WHATSAPP BUTTON */}
+            {/* RIGHT COL: PAYMENT (UPI SCAN & PAY OR BANK TRANSFER) */}
             <div className="lg:col-span-7 bg-[#003527] text-white rounded-3xl p-6 sm:p-8 shadow-xl space-y-6 relative overflow-hidden">
               <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-[#fea619]/10 rounded-full blur-2xl pointer-events-none" />
 
-              <div className="text-center space-y-2">
-                <div className="inline-flex items-center gap-1.5 bg-[#fea619] text-[#191c1d] px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wide">
+              {/* Payment Method Switcher Tabs */}
+              <div className="flex bg-[#064e3b] p-1.5 rounded-2xl border border-[#80bea6]/30 max-w-sm mx-auto">
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('upi')}
+                  className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    paymentMethod === 'upi'
+                      ? 'bg-[#fea619] text-[#191c1d] shadow-md'
+                      : 'text-[#b0f0d6] hover:text-white'
+                  }`}
+                >
                   <QrCode className="w-3.5 h-3.5" />
-                  <span>Instant UPI Scan & Pay</span>
-                </div>
-                <h3 className="font-heading font-extrabold text-2xl text-white">
-                  Scan to Complete Payment
-                </h3>
-                <p className="text-xs sm:text-sm text-[#b0f0d6] max-w-md mx-auto">
-                  Scan using Google Pay, PhonePe, Paytm, or BHIM UPI app to activate your membership and confirm courier delivery.
-                </p>
+                  <span>UPI Scan & Pay</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('bank')}
+                  className={`flex-1 py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                    paymentMethod === 'bank'
+                      ? 'bg-[#fea619] text-[#191c1d] shadow-md'
+                      : 'text-[#b0f0d6] hover:text-white'
+                  }`}
+                >
+                  <Building className="w-3.5 h-3.5" />
+                  <span>Bank Transfer</span>
+                </button>
               </div>
 
-              {/* QR Code Container */}
-              <div className="bg-white rounded-2xl p-4 sm:p-6 text-center max-w-sm mx-auto shadow-2xl border-4 border-[#fea619] relative group">
-                <div className="relative aspect-[3/4] w-full max-w-[260px] mx-auto overflow-hidden rounded-xl bg-white flex items-center justify-center">
-                  <img
-                    src="/qrcode.png"
-                    alt="BHIM UPI Scan & Pay QR Code"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
+              {paymentMethod === 'upi' ? (
+                /* TAB 1: UPI SCAN & PAY */
+                <div className="space-y-4 animate-fade-in">
+                  <div className="text-center space-y-1">
+                    <h3 className="font-heading font-extrabold text-2xl text-white">
+                      Scan UPI QR Code
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#b0f0d6] max-w-md mx-auto">
+                      Scan with Google Pay, PhonePe, Paytm, or BHIM to pay <strong>{selectedPlanObj.amount}</strong>.
+                    </p>
+                  </div>
 
-                <div className="mt-3 pt-3 border-t border-[#e7e8e9] space-y-1">
-                  <span className="text-[11px] font-bold text-[#707974] uppercase block">
-                    Official UPI ID:
-                  </span>
-                  <div className="flex items-center justify-center gap-2 bg-[#f8f9fa] py-1.5 px-3 rounded-lg border border-[#e1e3e4]">
-                    <span className="font-mono font-bold text-xs sm:text-sm text-[#003527] truncate">
-                      {UPI_ID}
-                    </span>
-                    <button
-                      onClick={handleCopyUpi}
-                      className="text-xs bg-[#003527] hover:bg-[#064e3b] text-white px-2.5 py-1 rounded flex items-center gap-1 transition-colors shrink-0"
-                    >
-                      {copiedUpi ? (
-                        <>
-                          <Check className="w-3 h-3 text-[#fea619]" />
-                          <span>Copied</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3 h-3" />
-                          <span>Copy</span>
-                        </>
-                      )}
-                    </button>
+                  {/* QR Code Container */}
+                  <div className="bg-white rounded-2xl p-4 sm:p-6 text-center max-w-sm mx-auto shadow-2xl border-4 border-[#fea619] relative group">
+                    <div className="relative aspect-[3/4] w-full max-w-[240px] mx-auto overflow-hidden rounded-xl bg-white flex items-center justify-center">
+                      <img
+                        src="/qrcode.png"
+                        alt="BHIM UPI Scan & Pay QR Code"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+
+                    <div className="mt-3 pt-3 border-t border-[#e7e8e9] space-y-1">
+                      <span className="text-[11px] font-bold text-[#707974] uppercase block">
+                        Official UPI ID:
+                      </span>
+                      <div className="flex items-center justify-center gap-2 bg-[#f8f9fa] py-1.5 px-3 rounded-lg border border-[#e1e3e4]">
+                        <span className="font-mono font-bold text-xs sm:text-sm text-[#003527] truncate">
+                          {UPI_ID}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={handleCopyUpi}
+                          className="text-xs bg-[#003527] hover:bg-[#064e3b] text-white px-2.5 py-1 rounded flex items-center gap-1 transition-colors shrink-0"
+                        >
+                          {copiedUpi ? (
+                            <>
+                              <Check className="w-3 h-3 text-[#fea619]" />
+                              <span>Copied</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3" />
+                              <span>Copy</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                /* TAB 2: BANK TRANSFER (NEFT / IMPS / RTGS) */
+                <div className="space-y-4 animate-fade-in">
+                  <div className="text-center space-y-1">
+                    <h3 className="font-heading font-extrabold text-2xl text-white">
+                      Direct Bank Transfer Details
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#b0f0d6] max-w-md mx-auto">
+                      Transfer <strong>{selectedPlanObj.amount}</strong> via NEFT, IMPS, RTGS, or Online Banking to our official account:
+                    </p>
+                  </div>
 
-              {/* INSTRUCTION & PROMINENT WHATSAPP BUTTON UNDER QR CODE */}
+                  <div className="bg-white text-[#191c1d] rounded-2xl p-5 sm:p-6 shadow-2xl border-4 border-[#fea619] max-w-md mx-auto space-y-3.5 text-xs">
+                    <div className="flex items-center justify-between pb-2 border-b border-[#e7e8e9]">
+                      <span className="font-bold text-[#855300] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                        <Building className="w-4 h-4 text-[#003527]" />
+                        Official Society Bank Account
+                      </span>
+                      <span className="bg-[#c3ecd7] text-[#003527] px-2 py-0.5 rounded text-[10px] font-extrabold uppercase">
+                        Verified
+                      </span>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[#707974]">Bank:</span>
+                        <span className="font-bold text-[#003527] text-sm">{SITE_INFO.bankDetails.bank}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-[#707974]">Account Name:</span>
+                        <span className="font-bold text-[#191c1d]">{SITE_INFO.bankDetails.accountName}</span>
+                      </div>
+
+                      <div className="flex justify-between items-center bg-[#f8f9fa] p-2.5 rounded-xl border border-[#e1e3e4]">
+                        <div>
+                          <span className="text-[10px] text-[#707974] block uppercase">Account Number</span>
+                          <span className="font-mono font-extrabold text-sm text-[#003527]">{SITE_INFO.bankDetails.accountNumber}</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleCopyAcc}
+                          className="text-xs bg-[#003527] hover:bg-[#064e3b] text-white px-2.5 py-1 rounded-lg flex items-center gap-1 transition-colors"
+                        >
+                          {copiedAcc ? <Check className="w-3 h-3 text-[#fea619]" /> : <Copy className="w-3 h-3" />}
+                          <span>{copiedAcc ? 'Copied' : 'Copy'}</span>
+                        </button>
+                      </div>
+
+                      <div className="flex justify-between items-center bg-[#f8f9fa] p-2.5 rounded-xl border border-[#e1e3e4]">
+                        <div>
+                          <span className="text-[10px] text-[#707974] block uppercase">IFSC Code</span>
+                          <span className="font-mono font-extrabold text-sm text-[#855300]">{SITE_INFO.bankDetails.ifscCode}</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleCopyIfsc}
+                          className="text-xs bg-[#003527] hover:bg-[#064e3b] text-white px-2.5 py-1 rounded-lg flex items-center gap-1 transition-colors"
+                        >
+                          {copiedIfsc ? <Check className="w-3 h-3 text-[#fea619]" /> : <Copy className="w-3 h-3" />}
+                          <span>{copiedIfsc ? 'Copied' : 'Copy'}</span>
+                        </button>
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-[#707974]">Branch:</span>
+                        <span className="font-semibold text-[#191c1d]">{SITE_INFO.bankDetails.branch} (Code: {SITE_INFO.bankDetails.branchCode})</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* INSTRUCTION & PROMINENT WHATSAPP BUTTON */}
               <div className="space-y-4 pt-2 text-center">
                 <div className="bg-[#064e3b]/80 border border-[#80bea6]/30 p-3.5 rounded-xl text-xs text-[#b0f0d6] text-left space-y-1.5">
                   <p className="font-bold text-[#fea619] flex items-center gap-1.5">
@@ -274,9 +393,9 @@ function RegisterFormContent() {
                     <span>Next steps for activation:</span>
                   </p>
                   <ol className="list-decimal list-inside space-y-0.5 text-[11px] leading-relaxed">
-                    <li>Scan QR Code & transfer <strong>{selectedPlanObj.amount}</strong>.</li>
-                    <li>Take a screenshot of the completed payment.</li>
-                    <li>Click the buttons below to join the WhatsApp group & send your screenshot.</li>
+                    <li>Complete payment of <strong>{selectedPlanObj.amount}</strong> using UPI QR or Bank Transfer.</li>
+                    <li>Take a screenshot of the completed transaction receipt.</li>
+                    <li>Click the button below to join the official WhatsApp group & share the receipt.</li>
                   </ol>
                 </div>
 
