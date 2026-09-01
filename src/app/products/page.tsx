@@ -136,7 +136,7 @@ export default function ProductsPage() {
 
         {/* Product Grid */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-16 bg-[#f8f9fa] rounded-3xl border border-[#e1e3e4] space-y-3">
+          <div className="text-center py-16 bg-[#f8f9fa] rounded-3xl border border-[#e1e3e4] space-y-3 animate-fade-in">
             <Package className="w-12 h-12 text-[#707974] mx-auto" />
             <h3 className="font-heading font-bold text-xl text-[#003527]">No products found</h3>
             <p className="text-sm text-[#404944]">Try adjusting your search query or category filter.</p>
@@ -151,11 +151,14 @@ export default function ProductsPage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            key={activeCategory}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in-up"
+          >
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white border border-[#e1e3e4] rounded-3xl overflow-hidden card-shadow hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group hover:border-[#80bea6]"
+                className="bg-white border border-[#e1e3e4] rounded-3xl overflow-hidden card-shadow-hover flex flex-col justify-between group hover:border-[#80bea6] shimmer-card"
               >
                 <div>
                   {/* Image Container */}

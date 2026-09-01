@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AppPreloader from '@/components/AppPreloader';
 import NavigationProgress from '@/components/NavigationProgress';
+import PageTransition from '@/components/PageTransition';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import './globals.css';
 
@@ -46,7 +47,6 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-ClientNode?: never;
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${inter.variable} h-full scroll-smooth`}>
@@ -56,7 +56,9 @@ ClientNode?: never;
           <NavigationProgress />
         </Suspense>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
         <FloatingWhatsApp />
       </body>
