@@ -1,0 +1,689 @@
+export interface Product {
+  id: string;
+  name: string;
+  malayalamName?: string;
+  category: 'Starter Packages & Kits' | 'Cooking Essentials & Oils' | 'Taste of Idukki Spices & Teas' | 'Health & Wellness' | 'Community & Solar Initiatives';
+  value: string;
+  price: string;
+  mrp?: string;
+  dp?: string;
+  sp?: string;
+  weight?: string;
+  group: string;
+  delivery: string;
+  badge: string;
+  description: string;
+  features: string[];
+  imageUrl: string;
+}
+
+export interface PlanTier {
+  id: string;
+  name: string;
+  malayalamName?: string;
+  price: string;
+  tagline: string;
+  isPopular?: boolean;
+  productValue: string;
+  benefits: string[];
+  featuresList: { text: string; included: boolean }[];
+  ctaText: string;
+  ctaLink: string;
+}
+
+export interface RoadmapTier {
+  step: number;
+  level: string;
+  title: string;
+  reward: string;
+  description: string;
+  qualifications: string;
+  iconName: string;
+  color: string;
+}
+
+export interface FaqItem {
+  id: string;
+  category: string;
+  question: string;
+  answer: string;
+}
+
+export const SITE_INFO = {
+  name: 'Easy Life Manager',
+  organization: 'Sayana Charitable Society',
+  tagline: 'A New Opportunity. A Better Future.',
+  mottoMalayalam: '“സംഘടിക്കുക ശക്തരാകുക”',
+  mottoEnglish: 'Empower Yourself. Grow Together. Build Your Future.',
+  subMotto: 'Become Strong. Become Independent. Move Forward.',
+  phone: '+91 89430 43143',
+  whatsapp: '+91 80750 28292',
+  whatsappNumber: '8075028292',
+  whatsappLink: 'https://wa.me/918075028292?text=Hello%2C%20I%20have%20an%20enquiry%20regarding%20Easy%20Life%20Manager.',
+  whatsappGroupLink: 'https://chat.whatsapp.com/ImhDHmQV6AZAe4BNmaFUKe?s=sw&p=a&mlu=4',
+  email: 'easylifemanager11@gmail.com',
+  address: 'Sayana Charitable Society Headquarters, 100 Stability Plaza, Ernakulam, Kerala - 682001',
+  regNumber: 'S-784/2018 (Registered Charitable Society)',
+};
+
+export const NAV_LINKS = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Membership', href: '/membership' },
+  { label: 'Benefits', href: '/benefits' },
+  { label: 'Products', href: '/products' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Contact', href: '/contact' },
+];
+
+export const MEMBERSHIP_PLANS: PlanTier[] = [
+  {
+    id: 'starter',
+    name: '₹999 Starter Purchase',
+    malayalamName: '₹999 പ്രാരംഭ പാക്കേജ് (ഓണകിറ്റ് / ഗ്രോസറി)',
+    price: '₹999',
+    tagline: 'Start Today. Grow Tomorrow.',
+    productValue: '₹4,385 MRP (High Value Kit)',
+    benefits: [
+      'Quality 21-item home essential package delivered directly to doorstep',
+      'Doorstep Courier Delivery within 2-3 business days',
+      'Direct entry to the Easy Life Manager community',
+      'Access to standard support and member updates',
+    ],
+    featuresList: [
+      { text: 'Product value matching or exceeding investment (MRP ₹4,385)', included: true },
+      { text: 'Fast, secure courier doorstep delivery across Kerala', included: true },
+      { text: 'Official community participant welcome kit', included: true },
+      { text: 'Progression through advanced reward tiers', included: false },
+      { text: 'Work-from-home eligibility and working funds', included: false },
+    ],
+    ctaText: 'Start with ₹999',
+    ctaLink: '/register?plan=999_purchase',
+  },
+  {
+    id: 'premium',
+    name: '₹1,000 Membership Plan',
+    malayalamName: '₹1,000 മെമ്പർഷിപ്പ് & ഗ്രോത്ത് പാക്കേജ് (5x റിട്ടേൺ)',
+    price: '₹1,000',
+    tagline: 'Become a Member. Start Growing.',
+    isPopular: true,
+    productValue: '₹5,000 Product Value (5x Return)',
+    benefits: [
+      'High-value Premium Product package worth ₹5,000 (Rice Bran Oil 2L Sets + Idukki Spices & Teas)',
+      'Full progression eligibility across all 5 growth tiers',
+      'Work-from-home activities and monthly working fund access',
+      'Exclusive community workshops, leadership events & training',
+    ],
+    featuresList: [
+      { text: 'Premium Product package worth ₹5,000 (5x Value Return)', included: true },
+      { text: 'Full progression through all 5 high-tier milestones', included: true },
+      { text: 'Work-from-home reward earning opportunities', included: true },
+      { text: 'Priority courier doorstep delivery included', included: true },
+      { text: 'Direct mentorship and business development support', included: true },
+    ],
+    ctaText: 'Become a Member (₹1,000)',
+    ctaLink: '/register?plan=1000_membership',
+  },
+];
+
+export const ROADMAP_TIERS: RoadmapTier[] = [
+  {
+    step: 1,
+    level: 'Tier 1',
+    title: 'Achiever Milestone',
+    reward: 'Brand New Smartphone & Welcome Kit',
+    description: 'Reach the initial milestone through community collaboration. Receive a brand new modern smartphone to manage your communications and digital activities.',
+    qualifications: 'Active member onboarding & foundational stage completion',
+    iconName: 'Smartphone',
+    color: '#064e3b',
+  },
+  {
+    step: 2,
+    level: 'Tier 2',
+    title: 'Leader Milestone',
+    reward: 'Premium Laptop & Digital Productivity Suite',
+    description: 'Advance to group leadership. Receive a high-performance laptop to power your work-from-home initiatives and team coordination.',
+    qualifications: 'Group facilitation & community development targets',
+    iconName: 'Laptop',
+    color: '#003527',
+  },
+  {
+    step: 3,
+    level: 'Tier 3',
+    title: 'Director Milestone',
+    reward: 'Smart Electric Scooter / Two-Wheeler Asset',
+    description: 'Empowering personal mobility and independence. Attain substantial community presence and receive dedicated transport support.',
+    qualifications: 'District-level network coordination & mentorship',
+    iconName: 'Bike',
+    color: '#855300',
+  },
+  {
+    step: 4,
+    level: 'Tier 4',
+    title: 'Executive Milestone',
+    reward: 'Gold Sovereign Rewards & Family Welfare Fund',
+    description: 'Attain substantial financial stability and tangible asset accumulation with gold sovereign rewards and emergency family welfare safety nets.',
+    qualifications: 'Regional growth achievement & leadership excellence',
+    iconName: 'Award',
+    color: '#fea619',
+  },
+  {
+    step: 5,
+    level: 'Tier 5',
+    title: 'President Milestone',
+    reward: 'Brand New Four-Wheeler Car & Executive Pension',
+    description: 'The pinnacle of community leadership. Full automotive sponsorship, lifetime recognition, and recurring executive leadership pension.',
+    qualifications: 'State-level societal contribution and supreme leadership benchmark',
+    iconName: 'Car',
+    color: '#0e3427',
+  },
+];
+
+export const PRODUCTS_LIST: Product[] = [
+  /* 1. STARTER & HOME KITS */
+  {
+    id: 'prod-1',
+    name: 'AWPL My Daily Choice / Onam Essential Home Package (21 Items)',
+    malayalamName: 'AWPL വിശ്വസനീയമായ ഹൈ ക്വാളിറ്റി ഹോം പാക്കേജ് (ഓണകിറ്റ് - 21 ഐറ്റംസ്)',
+    category: 'Starter Packages & Kits',
+    mrp: '₹4,385',
+    dp: '₹3,288',
+    sp: '9 SP',
+    value: '₹4,385 MRP',
+    price: '₹999 / ₹3,288 (DP)',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Mega Home Kit (21 Items)',
+    description: 'AWPL ന്റെ വിശ്വസനീയമായ (Hi Quality) വീട്ടിലേക്ക് ആവിശ്യ സാധനങ്ങളുമായി കമ്പിനി പാക്കേജ് (ഓണകിറ്റ്). 21 high-grade items including Eco Arogyam Tea, Spices, Detergents, Rice Bran Oil, and daily care essentials.',
+    features: [
+      '21 Authentic Quality Household Items',
+      'Eco Arogyam Tea & Bathveda Neem Tulsi Bar',
+      'Toshine Detergent, Limfresh & Dishwash',
+      'Jeeveda Rice Bran Oil (2 Ltr) & Kitchen King Masalas',
+      'Dentodoc Cream, Sniss Elite & Herbal Hair Cleansers',
+      'DP: ₹3,288 | MRP: ₹4,385 | SP: 9',
+    ],
+    imageUrl: '/IMG_2851.JPG',
+  },
+
+  /* 2. COOKING ESSENTIALS & OILS */
+  {
+    id: 'prod-2',
+    name: 'Jeeveda Physically Refined Rice Bran Oil (2 Bottle Set - 4L Total)',
+    malayalamName: 'ജീവേദ റീഫൈൻഡ് റൈസ് ബ്രാൻ ഓയിൽ (2 ലിറ്റർ x 2 ബോട്ടിൽ)',
+    category: 'Cooking Essentials & Oils',
+    mrp: '₹1,398',
+    dp: '₹998',
+    sp: '1000 Package',
+    value: '₹1,398 MRP',
+    price: '₹1,000/- Package',
+    group: 'All Members',
+    delivery: 'Express Courier (2-3 days)',
+    badge: '₹1,000 Package Choice',
+    description: 'Physically refined premium rice bran oil enriched with 14,000 PPM Oryzanol. Zero trans fats, promoting cardiovascular and metabolic wellness for the entire family.',
+    features: [
+      '2 Large Bottles (2 Litres Each = 4 Litres Total)',
+      '14,000 PPM Oryzanol Rich Formula',
+      'Trans Fat Free & Heart Healthy',
+      'MRP: ₹1,398 | DP: ₹998 (Special ₹1,000 Package)',
+    ],
+    imageUrl: '/IMG_2852.JPG',
+  },
+  {
+    id: 'prod-3',
+    name: 'Mist Mountain 100% Pure Coconut Oil (1 Litre Bottle)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ 100% പ്യുവർ വെളിച്ചെണ്ണ (1 ലിറ്റർ)',
+    category: 'Cooking Essentials & Oils',
+    mrp: '₹350',
+    dp: '₹280',
+    value: '₹350',
+    price: '₹280 / Combo Eligible',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: '100% Pure Homemade',
+    description: 'Taste of Idukki 100% pure homemade coconut oil prepared with traditional precision from fresh sun-dried copra with FSSAI certification.',
+    features: [
+      '100% Natural, Pure & Unadulterated',
+      'Authentic Kerala Homemade Processing',
+      'FSSAI Certified Food-Grade Packing (Lic No. 11326006000097)',
+    ],
+    imageUrl: '/coconut_oil.JPG',
+  },
+
+  /* 3. TASTE OF IDUKKI SPICES & TEAS */
+  {
+    id: 'prod-4',
+    name: 'Mist Mountain Taste of Idukki Cardamom Tea (100g / 250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ഇടുക്കി ഏലക്കായ ചായപ്പൊടി',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹180',
+    dp: '₹140',
+    sp: 'SP 115',
+    value: '₹180',
+    price: 'SP 115 (250g)',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Fresh Cardamom Infusion',
+    description: 'Directly sourced premium high-range Idukki cardamom blended with rich aromatic tea leaves for an authentic hill-station tea experience.',
+    features: [
+      'Fresh Idukki Cardamom Pods Infusion',
+      'Natural Homemade Blend with Rich Aroma',
+      'SP: 115 Points | Sealed Freshness Pouch',
+    ],
+    imageUrl: '/cardamom_tea.JPG',
+  },
+  {
+    id: 'prod-5',
+    name: 'Mist Mountain Royal Black Tea (250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ റോയൽ ബ്ലാക്ക് ടീ (250g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹260',
+    dp: '₹200',
+    sp: 'SP 115',
+    value: '₹260',
+    price: 'SP 115',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Popular Strong Tea',
+    description: 'Selected fine garden CTC black tea leaves crafted for maximum strength, rich golden color, and lasting refreshment.',
+    features: [
+      'Popular Strong Tea 250gm: SP 115',
+      'High-Grown Elevation Mountain Leaf',
+      '100% Pure Natural Processing',
+    ],
+    imageUrl: '/royal_black_tea.JPG',
+  },
+  {
+    id: 'prod-6',
+    name: 'Mist Mountain Tasty Hotel Blended Tea (250g & 500g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ടേസ്റ്റി ഹോട്ടൽ ബ്ലെൻഡഡ് ടീ (250g / 500g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹280',
+    dp: '₹220',
+    sp: 'SP 220 (500g)',
+    value: '₹280',
+    price: 'SP 220 (500g)',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Hotel Master Blend',
+    description: 'Specially crafted high-density tea blend designed for robust color, strong aroma, and rich cup density.',
+    features: [
+      'Popular Strong Tea 500gm: SP 220',
+      'Full-Bodied Restaurant & Family Formulation',
+      'Taste of Idukki Authentic Quality',
+    ],
+    imageUrl: '/tasty_hotel_tea.JPG',
+  },
+  {
+    id: 'prod-7',
+    name: 'Mist Mountain Delux Blended Tea (250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ഡീലക്സ് ബ്ലെൻഡഡ് ടീ (250g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹240',
+    dp: '₹190',
+    sp: 'SP 115',
+    value: '₹240',
+    price: 'SP 115',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Delux Flavour',
+    description: 'A harmonious blend of fine tea fannings and CTC grains for a smooth morning cup.',
+    features: [
+      'Balanced Aroma and Deep Color',
+      'Sealed Freshness Barrier Pack',
+      'Direct from Idukki Tea Gardens',
+    ],
+    imageUrl: '/delux_tea.JPG',
+  },
+  {
+    id: 'prod-8',
+    name: 'Mist Mountain Marayoor Pure Jaggery (1kg Solid Block)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ മറയൂർ നാടൻ ശർക്കര (1 കി.ഗ്രാം)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹220',
+    dp: '₹175',
+    value: '₹220',
+    price: '₹175 / Combo Eligible',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Traditional Marayoor',
+    description: 'Authentic GI-tagged Marayoor natural sugarcane jaggery handmade by tribal and rural farmers without chemical bleaching.',
+    features: [
+      '100% Pure Homemade Sugarcane Jaggery',
+      'Rich in Natural Iron and Minerals',
+      'Authentic Marayoor Origin Guaranteed',
+    ],
+    imageUrl: '/marayoor_jaggery.JPG',
+  },
+  {
+    id: 'prod-9',
+    name: 'Mist Mountain Taste of Idukki Black Coffee Powder (250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ബ്ലാക്ക് കോഫി പൗഡർ (250g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹190',
+    dp: '₹150',
+    value: '₹190',
+    price: '₹150',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Highland Dark Roast',
+    description: 'Highland dark roasted pure coffee beans ground to perfection for deep authentic Kerala black coffee with zero chicory adulteration.',
+    features: [
+      '100% Pure Roasted Coffee Beans',
+      'Intense Aroma & Full Body',
+      'Aroma-Lock Resealable Pouch',
+    ],
+    imageUrl: '/black_coffee.JPG',
+  },
+  {
+    id: 'prod-10',
+    name: 'Mist Mountain Taste of Idukki Ginger Coffee / Chukku Kaapi (100g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ചുക്കുകാപ്പി പൗഡർ (ഇമ്മ്യൂണിറ്റി ബ്ലെൻഡ് - 100g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹150',
+    dp: '₹120',
+    value: '₹150',
+    price: '₹120',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Herbal Immunity',
+    description: 'Traditional Kerala dry ginger coffee infused with crushed black pepper, coriander seeds, cardamom, and medicinal spices.',
+    features: [
+      'Natural Relief for Cold, Cough & Fatigue',
+      'Dry Ginger (Chukku) & Malabar Black Pepper Blend',
+      'Instant Brewing Formulation',
+    ],
+    imageUrl: '/ginger_coffee.JPG',
+  },
+  {
+    id: 'prod-11',
+    name: 'Mist Mountain Homemade Honey (250ml Bottle)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ഹോംമെയ്ഡ് തേൻ (250 മി.ലി)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹220',
+    dp: '₹170',
+    value: '₹220',
+    price: '₹170',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Pure Apiary Honey',
+    description: 'Naturally harvested farm apiary honey from multi-floral high-altitude blossoms. Unheated and unprocessed.',
+    features: [
+      '100% Pure Multi-Flora Honey',
+      'Natural Enzymes and Bio-Nutrients',
+      'Hygienically Packed Glass/Pet Bottle',
+    ],
+    imageUrl: '/homemade_honey.JPG',
+  },
+  {
+    id: 'prod-12',
+    name: 'Mist Mountain Pure Wild Forest Honey (500ml Bottle)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ ശുദ്ധമായ കാട്ടുതേൻ (500 മി.ലി)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹390',
+    dp: '₹310',
+    value: '₹390',
+    price: '₹310',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: '100% Wild Forest Honey',
+    description: 'Rare raw wild forest honey sustainably gathered from deep Idukki forest cliffs and giant tree hives by tribal collectives.',
+    features: [
+      '100% Raw Unpasteurized Forest Honey',
+      'Deep Amber Color with Rich Floral Undertones',
+      'High Therapeutic & Antioxidant Potency',
+    ],
+    imageUrl: '/forest_honey.JPG',
+  },
+  {
+    id: 'prod-13',
+    name: 'Mist Mountain Kashmiri Chilli Powder (250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ കാശ്മീരി മുളകുപൊടി (250g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹170',
+    dp: '₹130',
+    sp: 'SP 50 (100g)',
+    value: '₹170',
+    price: 'SP 50 (100g) / ₹130 (250g)',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Vibrant Natural Color',
+    description: 'Sun-dried high quality Kashmiri chillies ground for rich crimson red color with mild, pleasant culinary heat.',
+    features: [
+      'Chilly Powder 100gm: SP 50',
+      'No Added Colors or Chemical Additives',
+      'FSSAI Certified Spices Facility',
+    ],
+    imageUrl: '/kashmir_chilli.JPG',
+  },
+  {
+    id: 'prod-14',
+    name: 'Mist Mountain Farm Fresh Black Pepper (250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ നാടൻ കുരുമുളക് (250g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹260',
+    dp: '₹210',
+    value: '₹260',
+    price: '₹210',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'Bold Malabar Pepper',
+    description: 'Handpicked sun-dried bold black peppercorns straight from Idukki spice valley plantations with high piperine content.',
+    features: [
+      'High-Piperine Bold Peppercorns',
+      'Farm Fresh from Idukki Growers',
+      'Intense Pungency and Aroma',
+    ],
+    imageUrl: '/farm_pepper.JPG',
+  },
+  {
+    id: 'prod-15',
+    name: 'Mist Mountain 100% Pure Turmeric Powder (250g)',
+    malayalamName: 'മിസ്റ്റ് മൗണ്ടൻ നാടൻ മഞ്ഞൾപ്പൊടി (250g)',
+    category: 'Taste of Idukki Spices & Teas',
+    mrp: '₹140',
+    dp: '₹105',
+    value: '₹140',
+    price: '₹105',
+    group: 'All Members',
+    delivery: 'Courier (2-3 days)',
+    badge: 'High-Curcumin Pure',
+    description: 'Organically grown Idukki yellow turmeric rhizomes polished and ground to fine golden powder for culinary and health use.',
+    features: [
+      'Naturally Rich in Bioactive Curcumin',
+      'Zero Starch or Artificial Color Adulteration',
+      'Sealed Freshness Zip Pouch',
+    ],
+    imageUrl: '/turmeric.JPG',
+  },
+
+  /* 4. HEALTH & WELLNESS */
+  {
+    id: 'prod-16',
+    name: 'CSM Curcuma Elixir (Turmeric Extract - AYUSH Certified Cleanser)',
+    malayalamName: 'ആന്തരിക ശുദ്ധീകരണത്തിനുള്ള കുറുക്കുമ എലിക്സിർ (ആയുഷ് സർട്ടിഫൈഡ്)',
+    category: 'Health & Wellness',
+    mrp: '₹1,850',
+    dp: '₹1,250',
+    value: '₹1,850',
+    price: '₹1,250',
+    group: 'Premium Members',
+    delivery: 'Express Courier (Free)',
+    badge: 'AYUSH Certified',
+    description: 'ആന്തരിക ശുദ്ധീകരണത്തിനും പ്രതിരോധശക്തിക്കും നമ്മെ സഹായിക്കുന്ന, മഞ്ഞൾ അടിസ്ഥാനപ്പെടുത്തിയ ഉൽപ്പന്നമാണ് കുറുക്കുമ എലിക്സിർ. Certified by the Ministry of AYUSH and tested by Care Keralam FSSAI lab.',
+    features: [
+      'Certification from Ministry of AYUSH (Govt. of India)',
+      'Care Keralam FSSAI Certified Laboratory Tested',
+      'Standardized Curcuminoids for Cellular Cleansing',
+      'Tested Free of Heavy Metals and Synthetic Preservatives',
+    ],
+    imageUrl: '/curcuma_elixir.JPG',
+  },
+  {
+    id: 'prod-17',
+    name: "MWC Women's Plus Wellness Patch (30 Patches)",
+    malayalamName: "MWC വിമൻസ് പ്ലസ് വെൽനസ് ട്രാൻസ്‌ഡെർമൽ പാച്ച് (30 Patches)",
+    category: 'Health & Wellness',
+    mrp: '₹2,999',
+    dp: '₹1,999',
+    sp: '12 SP',
+    value: '₹2,999',
+    price: '₹1,999',
+    group: 'Premium Members',
+    delivery: 'Express Courier (Free)',
+    badge: "Hormonal Balance & Vitality",
+    description: "Nourish her naturally. MWC Women's Plus Patch supports hormonal harmony, reproductive health, mood balance, energy, skin, hair, nails, and menstrual comfort with natural botanicals.",
+    features: [
+      'Gotu-Kola, Damiana, Black Cohosh & Valerian Extract',
+      'Skull Cap, Oat Seed & Ginger Extract Natural Formula',
+      'Eases Menstrual Discomfort, Cramps & Daily Fatigue',
+      'Nourishes Skin, Hair & Nails from Within',
+      '30 Daily Transdermal Patches (24-Hour Sustained Support)',
+    ],
+    imageUrl: '/womens_plus.JPG',
+  },
+  {
+    id: 'prod-18',
+    name: 'MWC Fat Burner Plus Metabolism Patch (30 Patches)',
+    malayalamName: 'MWC ഫാറ്റ് ബർണർ പ്ലസ് മെറ്റബോളിസം പാച്ച് (30 Patches)',
+    category: 'Health & Wellness',
+    mrp: '₹2,999',
+    dp: '₹1,999',
+    sp: '12 SP',
+    value: '₹2,999',
+    price: '₹1,999',
+    group: 'Premium Members',
+    delivery: 'Express Courier (Free)',
+    badge: 'Fat Burn & Metabolism',
+    description: 'Burn fat, boost metabolism, and feel amazing. Powered by Fucus Vesiculosus, Yerba Mate, Guarana, and L-Carnitine for effective all-day natural calorie burning and appetite control.',
+    features: [
+      'Fucus Vesiculosus, Zinc Pyruvate, 5-HTP & Yerba Mate',
+      'Guarana Extract, L-Carnitine, Flaxseed Oil & Raspberry Ketone',
+      'Targets Stubborn Fat & Accelerates Calorie Burning',
+      'Natural Appetite Control & Craving Reduction',
+      '30 Daily Topical Patches (Made with US Quality Formulation)',
+    ],
+    imageUrl: '/fat_burner.JPG',
+  },
+  {
+    id: 'prod-19',
+    name: 'MWC The Brain Power Focus & Memory Patch',
+    malayalamName: 'MWC ദി ബ്രെയിൻ പവർ ഫോക്കസ് & മെമ്മറി പാച്ച്',
+    category: 'Health & Wellness',
+    mrp: '₹2,999',
+    dp: '₹1,999',
+    sp: '12 SP',
+    value: '₹2,999',
+    price: '₹1,999',
+    group: 'Premium Members',
+    delivery: 'Express Courier (Free)',
+    badge: 'Focus, Clarity & Memory',
+    description: 'Nourish your brain and elevate your cognitive performance. Formulated with Bacopa Monnieri, Ginkgo Biloba, and Acetyl L-Carnitine for enhanced concentration, mental clarity, and memory.',
+    features: [
+      'Ginkgo Biloba Extract, Camellia Sinensis & Bacopa Monnieri',
+      'Acetyl L-Carnitine & Magnesium L-Threonate',
+      'Supports Mental Clarity, Memory & Decision Making',
+      'Reduces Brain Fog, Fatigue & Daily Mental Stress',
+      'Safe Transdermal Technology for Direct Nutrient Absorption',
+    ],
+    imageUrl: '/brain_power.JPG',
+  },
+  {
+    id: 'prod-20',
+    name: "MWC Men's Plus Natural Vitality Patch (30 Patches)",
+    malayalamName: "MWC മെൻസ് പ്ലസ് നാച്ചുറൽ വെൽനസ് പാച്ച് (30 Patches)",
+    category: 'Health & Wellness',
+    mrp: '₹2,999',
+    dp: '₹1,999',
+    sp: '12 SP',
+    value: '₹2,999',
+    price: '₹1,999',
+    group: 'Premium Members',
+    delivery: 'Express Courier (Free)',
+    badge: 'Strength & Stamina',
+    description: 'Feel strong, live strong. Formulated with Ginseng, Siberian Ginseng, Fo-Ti, Saw Palmetto, and L-Arginine to naturally enhance energy, stamina, muscle strength, and male wellness.',
+    features: [
+      'Ginseng, Siberian Ginseng, Fo-Ti & Damiana Extract',
+      'Saw Palmetto, Tribulus Terrestris & L-Arginine',
+      'Boosts Stamina, Endurance & Blood Circulation',
+      'Supports Prostate Health & Natural Vitality',
+      '30 Daily Transdermal Patches',
+    ],
+    imageUrl: '/mens_plus.JPG',
+  },
+
+  /* 5. COMMUNITY & SOLAR INITIATIVES */
+  {
+    id: 'prod-21',
+    name: 'KSEB & Central Govt Rooftop Solar Subsidy Project (Jico Solar)',
+    malayalamName: 'KSEB & കേന്ദ്ര സർക്കാർ റൂഫ്‌ടോപ്പ് സോളാർ സബ്‌സിഡി പദ്ധതി (₹78,000/- രൂപ സബ്‌സിഡി)',
+    category: 'Community & Solar Initiatives',
+    mrp: '₹1,45,000',
+    dp: '₹67,000 after Subsidy',
+    value: '₹78,000 MNRE Subsidy',
+    price: '₹78,000/- Subsidy Scheme',
+    group: 'Kerala Homeowners',
+    delivery: 'On-Site Installation & KSEB Net Metering',
+    badge: '₹78,000 MNRE Subsidy',
+    description: 'ഇലക്ട്രിസിറ്റി ബില്ല് ലാഭിക്കൂ... നിങ്ങളുടെ സമ്പാദ്യം ഇരട്ടിയാക്കൂ... Central Government MNRE Rooftop Solar Subsidy scheme offering ₹78,000 direct subsidy on on-grid solar plant installation with 25 years solar panel warranty, easy EMI options, and KSEB permits.',
+    features: [
+      '₹78,000 Direct MNRE Central Govt Subsidy',
+      '25 Years Warranty on Solar Panels & 10 Years on Inverter',
+      'Complete KSEB Permit & Loan Arrangement Assistance',
+      'Zero or Low-Cost EMI Monthly Installment Plans',
+      'ISO 9001:2015 & CRISIL Certified Engineering',
+    ],
+    imageUrl: '/solar_subsidy.JPG',
+  },
+];
+
+export const FAQ_ITEMS: FaqItem[] = [
+  {
+    id: 'faq-1',
+    category: 'General',
+    question: 'What is Easy Life Manager?',
+    answer: 'Easy Life Manager is an empowering community initiative organized under the Sayana Charitable Society (Registered Society S-784/2018). It is dedicated to providing reliable pathways to financial independence, structured support, quality products, and collective growth for individuals and families across the region.',
+  },
+  {
+    id: 'faq-2',
+    category: 'Plans',
+    question: 'How can I start my journey?',
+    answer: 'You can start by choosing between two simple options: (1) The ₹999 Starter Purchase, which delivers the 21-item essential Onam kit (MRP ₹4,385 / DP ₹3,288) or ₹1,000 grocery combos right to your doorstep; or (2) The ₹1,000 Premium Membership, which unlocks high-value products worth ₹5,000, Work From Home eligibility, and full progression across all 5 roadmap milestones.',
+  },
+  {
+    id: 'faq-3',
+    category: 'Deliveries',
+    question: 'What do I receive for the ₹999 Starter purchase?',
+    answer: 'For the ₹999 purchase, you receive high-value daily essential products (such as the 21-item Daily Need kit, Rice Bran Oil packages, or Idukki hill spices) delivered directly to your home address via registered courier service within 2-3 business days.',
+  },
+  {
+    id: 'faq-4',
+    category: 'Plans',
+    question: 'What do I receive through the ₹1,000 Membership Plan?',
+    answer: 'The ₹1,000 Membership Plan provides extraordinary value: a premium product package worth ₹5,000 (5x your investment), active membership credentials, eligibility for work-from-home tasks, monthly working funds, and qualification rights for all high-tier milestone rewards (Phone, Laptop, Two-Wheeler, Gold, and Car).',
+  },
+  {
+    id: 'faq-5',
+    category: 'Work From Home',
+    question: 'Is Work From Home available for all members?',
+    answer: 'Yes! Work-from-home opportunities, digital coordination tasks, and flexible community engagement roles are available for all active registered members in the ₹1,000 tier, enabling you to earn supplemental income right from your home workspace.',
+  },
+  {
+    id: 'faq-6',
+    category: 'Deliveries',
+    question: 'How are products delivered to my address?',
+    answer: 'All products are safely packed and dispatched through reputed courier partners (such as DTDC, Professional Couriers, and India Post) directly to the delivery address you provide during registration. Tracking details are provided via SMS / WhatsApp.',
+  },
+  {
+    id: 'faq-7',
+    category: 'Registration',
+    question: 'How can I join and register today?',
+    answer: 'You can register online through our quick Join Now form on this website, or connect directly with our support helpdesk on our official WhatsApp community group at https://chat.whatsapp.com/ImhDHmQV6AZAe4BNmaFUKe?s=sw&p=a&mlu=4.',
+  },
+  {
+    id: 'faq-8',
+    category: 'General',
+    question: 'Is Sayana Charitable Society an authorized organization?',
+    answer: 'Yes, Sayana Charitable Society is a duly registered social and charitable organization founded to elevate community wellbeing, promote skill acquisition, and create sustainable livelihoods (Reg. S-784/2018).',
+  },
+];

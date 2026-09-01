@@ -1,69 +1,509 @@
-import Image from "next/image";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { SITE_INFO, MEMBERSHIP_PLANS, ROADMAP_TIERS, PRODUCTS_LIST } from '@/data/siteData';
+import MottoBanner from '@/components/MottoBanner';
+import {
+  Package,
+  HandCoins,
+  TrendingUp,
+  ArrowRight,
+  ShieldCheck,
+  CheckCircle2,
+  Sparkles,
+  Users,
+  Award,
+  Truck,
+  Laptop,
+  PhoneCall,
+  ChevronRight,
+} from 'lucide-react';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col gap-0 overflow-hidden">
+      {/* 1. HERO SECTION */}
+      <section className="relative w-full overflow-hidden hero-pattern border-b border-[#e1e3e4] py-12 md:py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 flex flex-col items-start space-y-6">
+              {/* Society Badge */}
+              <div className="inline-flex items-center gap-2 bg-[#ffddb8] text-[#855300] px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider shadow-sm border border-[#fea619]/40">
+                <ShieldCheck className="w-4 h-4 text-[#855300]" />
+                <span>{SITE_INFO.organization}</span>
+              </div>
+
+              {/* Main Headline */}
+              <h1 className="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-[#003527] leading-[1.15] tracking-tight">
+                A New Opportunity.{' '}
+                <span className="text-[#855300] underline decoration-[#fea619] decoration-wavy decoration-2">
+                  A Better Future.
+                </span>{' '}
+                Build Your Life with Easy Life Manager.
+              </h1>
+
+              {/* Subtitle */}
+              <p className="text-base sm:text-lg text-[#404944] leading-relaxed max-w-2xl">
+                A structured, community-centered opportunity designed by the{' '}
+                <strong className="text-[#003527]">{SITE_INFO.organization}</strong> to help you
+                overcome challenges, access tangible high-value resources, and establish a stable
+                financial foundation for yourself and your loved ones.
+              </p>
+
+              {/* Motto Banner Light */}
+              <div className="w-full">
+                <MottoBanner variant="light" />
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-4 pt-2">
+                <Link
+                  href="/register"
+                  className="bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2 group"
+                >
+                  <span>Join Now & Register</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+
+                <Link
+                  href="/membership"
+                  className="bg-white hover:bg-[#c3ecd7]/40 text-[#003527] border-2 border-[#003527] font-bold text-base px-7 py-4 rounded-xl transition-all duration-300 flex items-center gap-2"
+                >
+                  <span>Explore Plans</span>
+                </Link>
+
+                <a
+                  href={`tel:${SITE_INFO.phone}`}
+                  className="inline-flex lg:hidden items-center gap-2 px-5 py-4 rounded-xl bg-[#064e3b] text-white font-medium text-sm"
+                >
+                  <PhoneCall className="w-4 h-4" />
+                  <span>Call Us</span>
+                </a>
+              </div>
+
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center gap-6 pt-4 text-xs font-semibold text-[#707974]">
+                <div className="flex items-center gap-1.5 text-[#003527]">
+                  <CheckCircle2 className="w-4 h-4 text-[#fea619]" />
+                  <span>Doorstep Courier Delivery</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[#003527]">
+                  <CheckCircle2 className="w-4 h-4 text-[#fea619]" />
+                  <span>5x Product Value Return</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-[#003527]">
+                  <CheckCircle2 className="w-4 h-4 text-[#fea619]" />
+                  <span>Work-From-Home Support</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Hero Image Card */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] w-full group">
+                <img
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+                  alt="Sayana Charitable Society Community Members collaborating"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#003527] via-[#003527]/30 to-transparent" />
+
+                {/* Floating Achievement Card 1 */}
+                <div className="absolute bottom-6 left-6 right-6 p-5 bg-white/95 backdrop-blur-md rounded-2xl border border-white shadow-lg text-[#191c1d] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-[#c3ecd7] flex items-center justify-center text-[#003527]">
+                        <Sparkles className="w-4 h-4" />
+                      </div>
+                      <span className="font-heading font-bold text-sm text-[#003527]">
+                        Verified Initiative
+                      </span>
+                    </div>
+                    <span className="text-xs bg-[#ffddb8] text-[#855300] font-bold px-2.5 py-0.5 rounded-full">
+                      5-Tier Rewards
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#404944] leading-relaxed">
+                    Designed to empower thousands of families with reliable income streams, high-utility products, and community solidarity.
+                  </p>
+                </div>
+
+                {/* Top Badge */}
+                <div className="absolute top-5 left-5 bg-[#003527]/90 backdrop-blur-sm text-white px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 border border-white/20">
+                  <Users className="w-3.5 h-3.5 text-[#fea619]" />
+                  <span>Growing Kerala Community</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* 2. STATS & HIGHLIGHTS */}
+      <section className="bg-[#003527] text-white py-12 border-b border-[#064e3b]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            <div className="space-y-1">
+              <p className="font-heading font-extrabold text-3xl sm:text-4xl text-[#fea619]">10,000+</p>
+              <p className="text-xs sm:text-sm text-[#b0f0d6] font-medium">Registered Participants</p>
+            </div>
+            <div className="space-y-1">
+              <p className="font-heading font-extrabold text-3xl sm:text-4xl text-white">5x</p>
+              <p className="text-xs sm:text-sm text-[#b0f0d6] font-medium">Product Value Benefit</p>
+            </div>
+            <div className="space-y-1">
+              <p className="font-heading font-extrabold text-3xl sm:text-4xl text-[#fea619]">14</p>
+              <p className="text-xs sm:text-sm text-[#b0f0d6] font-medium">Districts Supported</p>
+            </div>
+            <div className="space-y-1">
+              <p className="font-heading font-extrabold text-3xl sm:text-4xl text-white">100%</p>
+              <p className="text-xs sm:text-sm text-[#b0f0d6] font-medium">Doorstep Courier Delivery</p>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* 3. THREE CORE PILLARS */}
+      <section className="w-full bg-white py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#855300] bg-[#ffddb8] px-3.5 py-1 rounded-full">
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>Comprehensive Ecosystem</span>
+            </div>
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#003527]">
+              Your Journey Towards Growth Starts Here
+            </h2>
+            <p className="text-base sm:text-lg text-[#404944]">
+              We provide the tools, support, and community network necessary to help you overcome
+              financial challenges and achieve sustainable independence.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Pillar 1 */}
+            <div className="bg-[#f8f9fa] border border-[#e1e3e4] rounded-2xl p-8 card-shadow hover:-translate-y-1.5 transition-all duration-300 flex flex-col group hover:border-[#80bea6]">
+              <div className="w-14 h-14 rounded-2xl bg-[#c3ecd7] text-[#003527] flex items-center justify-center mb-6 group-hover:bg-[#003527] group-hover:text-white transition-colors duration-300">
+                <Package className="w-7 h-7" />
+              </div>
+              <h3 className="font-heading font-bold text-2xl text-[#003527] mb-3">
+                Valuable Products
+              </h3>
+              <p className="text-sm text-[#404944] leading-relaxed flex-grow">
+                Access a curated range of high-quality products offering genuine value and practical utility for your everyday life, wellness, and work.
+              </p>
+              <Link
+                href="/products"
+                className="text-[#003527] font-bold text-sm flex items-center gap-2 hover:text-[#855300] transition-colors mt-6 pt-4 border-t border-[#e7e8e9]"
+              >
+                <span>Explore Products</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Pillar 2 */}
+            <div className="bg-[#f8f9fa] border-2 border-[#fea619]/40 rounded-2xl p-8 card-shadow hover:-translate-y-1.5 transition-all duration-300 flex flex-col relative overflow-hidden group hover:border-[#fea619]">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-[#fea619]/10 rounded-bl-full pointer-events-none" />
+              <div className="w-14 h-14 rounded-2xl bg-[#ffddb8] text-[#855300] flex items-center justify-center mb-6 group-hover:bg-[#fea619] group-hover:text-[#191c1d] transition-colors duration-300">
+                <HandCoins className="w-7 h-7" />
+              </div>
+              <h3 className="font-heading font-bold text-2xl text-[#003527] mb-3">
+                Financial Assistance
+              </h3>
+              <p className="text-sm text-[#404944] leading-relaxed flex-grow">
+                Structured support programs and working funds designed to provide stability during challenging times, helping you build a stronger financial foundation.
+              </p>
+              <Link
+                href="/benefits"
+                className="text-[#003527] font-bold text-sm flex items-center gap-2 hover:text-[#855300] transition-colors mt-6 pt-4 border-t border-[#e7e8e9]"
+              >
+                <span>Learn About Benefits</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* Pillar 3 */}
+            <div className="bg-[#f8f9fa] border border-[#e1e3e4] rounded-2xl p-8 card-shadow hover:-translate-y-1.5 transition-all duration-300 flex flex-col group hover:border-[#80bea6]">
+              <div className="w-14 h-14 rounded-2xl bg-[#c3ecd7] text-[#003527] flex items-center justify-center mb-6 group-hover:bg-[#003527] group-hover:text-white transition-colors duration-300">
+                <TrendingUp className="w-7 h-7" />
+              </div>
+              <h3 className="font-heading font-bold text-2xl text-[#003527] mb-3">
+                Business & WFH
+              </h3>
+              <p className="text-sm text-[#404944] leading-relaxed flex-grow">
+                Join a thriving statewide network. Develop valuable skills, create reliable supplemental income, and achieve independence within our supportive ecosystem.
+              </p>
+              <Link
+                href="/membership"
+                className="text-[#003527] font-bold text-sm flex items-center gap-2 hover:text-[#855300] transition-colors mt-6 pt-4 border-t border-[#e7e8e9]"
+              >
+                <span>View Opportunities</span>
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. MEMBERSHIP TIERS SPOTLIGHT */}
+      <section className="w-full bg-[#f3f4f5] py-16 sm:py-24 border-y border-[#e1e3e4]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#003527]">
+              Simple, Accessible Entry Options
+            </h2>
+            <p className="text-base sm:text-lg text-[#404944]">
+              Choose the pathway that best fits your goals. Start small or unlock the full power of community membership.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+            {MEMBERSHIP_PLANS.map((plan) => (
+              <div
+                key={plan.id}
+                className={`rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 relative ${
+                  plan.isPopular
+                    ? 'bg-white border-2 border-[#fea619] shadow-2xl scale-[1.02]'
+                    : 'bg-white border border-[#e1e3e4] card-shadow'
+                }`}
+              >
+                {plan.isPopular && (
+                  <div className="absolute -top-4 right-8 bg-[#fea619] text-[#191c1d] text-xs font-extrabold px-4 py-1.5 rounded-full shadow-md uppercase tracking-wider flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Recommended Choice</span>
+                  </div>
+                )}
+
+                <div className="space-y-6">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#707974]">
+                      {plan.tagline}
+                    </span>
+                    <h3 className="font-heading font-bold text-2xl sm:text-3xl text-[#003527] mt-1">
+                      {plan.name}
+                    </h3>
+                  </div>
+
+                  <div className="p-4 bg-[#f8f9fa] rounded-2xl border border-[#e7e8e9]">
+                    <span className="text-xs text-[#707974] block">Guaranteed Return</span>
+                    <span className="text-lg font-bold text-[#855300]">
+                      {plan.productValue}
+                    </span>
+                  </div>
+
+                  <div className="space-y-3 pt-2">
+                    <p className="text-xs font-bold text-[#003527] uppercase tracking-wider">
+                      Included Advantages:
+                    </p>
+                    <ul className="space-y-2.5">
+                      {plan.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-sm text-[#404944]">
+                          <CheckCircle2 className="w-4 h-4 text-[#003527] shrink-0 mt-0.5" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="pt-8">
+                  <Link
+                    href={plan.ctaLink}
+                    className={`w-full py-4 px-6 rounded-xl font-bold text-center block transition-all shadow-sm ${
+                      plan.isPopular
+                        ? 'bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white'
+                        : 'bg-[#003527] hover:bg-[#064e3b] text-white'
+                    }`}
+                  >
+                    {plan.ctaText}
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/membership"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#003527] hover:text-[#855300] hover:underline"
+            >
+              <span>View full feature comparison table</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 4.5 AUTHENTIC PRODUCTS SPOTLIGHT */}
+      <section className="w-full bg-white py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#855300] bg-[#ffddb8] px-3.5 py-1 rounded-full">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Verified High-Utility Products</span>
+              </div>
+              <h2 className="font-heading font-extrabold text-3xl sm:text-4xl text-[#003527]">
+                Authentic Home Essentials & Packages
+              </h2>
+              <p className="text-sm sm:text-base text-[#404944] max-w-2xl">
+                From the 21-item AWPL Onam Kit to pure Idukki spices, rice bran oils, and AYUSH-certified wellness elixirs delivered straight to your door.
+              </p>
+            </div>
+
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-2 text-[#003527] hover:text-[#855300] font-bold text-sm bg-[#f3f4f5] hover:bg-[#e7e8e9] px-5 py-3 rounded-xl transition-colors shrink-0"
+            >
+              <span>View Full Catalog</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {PRODUCTS_LIST.slice(0, 4).map((product) => (
+              <div
+                key={product.id}
+                className="bg-[#f8f9fa] border border-[#e1e3e4] rounded-2xl overflow-hidden hover:border-[#fea619] transition-all duration-300 card-shadow flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="h-48 w-full bg-white relative overflow-hidden flex items-center justify-center p-2">
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-2.5 right-2.5 bg-[#003527] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                      {product.badge}
+                    </div>
+                  </div>
+
+                  <div className="p-5 space-y-2">
+                    <span className="text-[10px] font-bold text-[#855300] uppercase tracking-wider block">
+                      {product.category}
+                    </span>
+                    <h3 className="font-heading font-bold text-base text-[#003527] line-clamp-1">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs text-[#404944] line-clamp-2">
+                      {product.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-5 pt-0">
+                  <div className="p-2.5 bg-white rounded-xl border border-[#e7e8e9] flex items-center justify-between text-xs mb-3">
+                    <span className="text-[#707974]">Value/DP:</span>
+                    <span className="font-bold text-[#003527]">{product.dp || product.price}</span>
+                  </div>
+
+                  <Link
+                    href={`/products`}
+                    className="w-full bg-[#003527] hover:bg-[#064e3b] text-white text-xs font-bold py-2.5 px-3 rounded-lg text-center block transition-colors"
+                  >
+                    View Details
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. ROADMAP TEASER */}
+      <section className="w-full bg-[#f8f9fa] py-16 sm:py-24 border-t border-[#e1e3e4]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#003527] bg-[#c3ecd7] px-3.5 py-1 rounded-full">
+              <Award className="w-3.5 h-3.5 text-[#003527]" />
+              <span>5-Stage Progression</span>
+            </div>
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-[#003527]">
+              High-Tier Progression Roadmap
+            </h2>
+            <p className="text-base sm:text-lg text-[#404944]">
+              As a member of Easy Life Manager, your dedication and team building unlock substantial milestones.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {ROADMAP_TIERS.map((tier) => (
+              <div
+                key={tier.step}
+                className="bg-[#f8f9fa] border border-[#e1e3e4] rounded-2xl p-6 flex flex-col justify-between hover:border-[#fea619] transition-all duration-300 card-shadow group"
+              >
+                <div className="space-y-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#003527] text-[#fea619] flex items-center justify-center font-bold text-sm">
+                    {tier.step}
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold text-[#855300] uppercase tracking-wider">
+                      {tier.level}
+                    </span>
+                    <h4 className="font-heading font-bold text-base text-[#003527] mt-0.5">
+                      {tier.title}
+                    </h4>
+                  </div>
+                  <div className="p-2.5 bg-[#ffddb8]/40 rounded-lg text-xs font-bold text-[#855300]">
+                    {tier.reward}
+                  </div>
+                  <p className="text-xs text-[#404944] leading-relaxed">
+                    {tier.description}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-[#e7e8e9] text-[11px] font-medium text-[#707974]">
+                  {tier.qualifications}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              href="/benefits"
+              className="inline-flex items-center gap-2 bg-[#003527] text-white font-bold text-sm px-6 py-3 rounded-xl hover:bg-[#064e3b] transition-colors"
+            >
+              <span>Explore All Benefits & Rewards</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. CALL TO ACTION SECTION */}
+      <section className="w-full bg-[#003527] py-16 sm:py-20 text-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <span className="inline-block bg-[#fea619] text-[#191c1d] font-bold text-xs uppercase tracking-widest px-4 py-1.5 rounded-full">
+              Registration Open
+            </span>
+            <h2 className="font-heading font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+              Start Today. Grow Together. Secure Your Future.
+            </h2>
+            <p className="text-base sm:text-xl text-[#b0f0d6] max-w-2xl mx-auto">
+              Join thousands of individuals across Kerala taking positive steps towards financial stability and collective success.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
+              <Link
+                href="/register"
+                className="bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold text-base px-8 py-4 rounded-xl shadow-lg transition-all"
+              >
+                Join Now Online
+              </Link>
+              <a
+                href={SITE_INFO.whatsappGroupLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-transparent border-2 border-white hover:bg-white hover:text-[#003527] text-white font-bold text-base px-8 py-4 rounded-xl transition-all flex items-center gap-2"
+              >
+                <span>Join WhatsApp Group</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
