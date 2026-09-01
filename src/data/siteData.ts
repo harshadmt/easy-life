@@ -49,6 +49,18 @@ export interface FaqItem {
   answer: string;
 }
 
+export interface DirectSellingCompany {
+  rank: number;
+  id: string;
+  name: string;
+  sector: string;
+  malayalamSector: string;
+  category: 'Health & Wellness' | 'FMCG & Groceries' | 'Ayurvedic Care' | 'Beauty & Lifestyle';
+  description: string;
+  logoType: 'amway' | 'vestige' | 'herbalife' | 'modicare' | 'milifestyle' | 'forever' | 'rcm' | 'imc' | 'tupperware' | 'oriflame';
+  highlights: string[];
+}
+
 export const SITE_INFO = {
   name: 'Easy Life Manager',
   organization: 'Sayana Charitable Society',
@@ -718,5 +730,118 @@ export const FAQ_ITEMS: FaqItem[] = [
     category: 'General',
     question: 'Is Sayana Charitable Society an authorized organization?',
     answer: 'Yes, Sayana Charitable Society is a duly registered social and charitable organization founded to elevate community wellbeing, promote skill acquisition, and create sustainable livelihoods (Reg. S-784/2018).',
+  },
+];
+
+export const TOP_DIRECT_SELLING_COMPANIES: DirectSellingCompany[] = [
+  {
+    rank: 1,
+    id: 'amway',
+    name: 'Amway India',
+    sector: 'Health, Beauty, Home Care',
+    malayalamSector: 'ഹെൽത്ത്, ബ്യൂട്ടി & ഹോം കെയർ',
+    category: 'Health & Wellness',
+    description: 'Global pioneer in nutritional supplements, premium skincare (Artistry), and high-potency home care products with widespread presence across India.',
+    logoType: 'amway',
+    highlights: ['Nutrilite Nutrition', 'Artistry Skincare', 'Glister Oral Care', 'Home Care Solutions'],
+  },
+  {
+    rank: 2,
+    id: 'vestige',
+    name: 'Vestige Marketing',
+    sector: 'Wellness & Personal Care',
+    malayalamSector: 'വെൽനസ് & പേഴ്സണൽ കെയർ',
+    category: 'Health & Wellness',
+    description: 'Leading Indian direct selling powerhouse offering comprehensive health supplements, personal grooming, healthcare, and premium cosmetics (Mistral of Milan).',
+    logoType: 'vestige',
+    highlights: ['Ayusante Ayurveda', 'Assure Personal Care', 'Zeta Tea & Coffee', 'Hyvest Home Hygiene'],
+  },
+  {
+    rank: 3,
+    id: 'herbalife',
+    name: 'Herbalife Nutrition',
+    sector: 'Weight Management & Nutrition',
+    malayalamSector: 'ഭാര നിയന്ത്രണം & ന്യൂട്രീഷൻ',
+    category: 'Health & Wellness',
+    description: 'Premier global nutrition brand renowned for meal replacement protein shakes, dietary wellness supplements, energy drinks, and personalized fitness programs.',
+    logoType: 'herbalife',
+    highlights: ['Formula 1 Nutritional Shake', 'Afresh Energy Drink', 'Protein Powder', 'Active Nutrition'],
+  },
+  {
+    rank: 4,
+    id: 'modicare',
+    name: 'Modicare',
+    sector: 'Lifestyle & Wellness',
+    malayalamSector: 'ലൈഫ്സ്റ്റൈൽ & വെൽനസ്',
+    category: 'Beauty & Lifestyle',
+    description: 'One of India’s pioneering direct selling brands spanning holistic wellness, urban color cosmetics, essential groceries (Soul Flavours), and tech lifestyle accessories.',
+    logoType: 'modicare',
+    highlights: ['Well Nutritional Range', 'Urban Color London', 'Schloka Skincare', 'Soul Flavours Foods'],
+  },
+  {
+    rank: 5,
+    id: 'milifestyle',
+    name: 'Mi Lifestyle Marketing',
+    sector: 'Ayurvedic & Agro Care',
+    malayalamSector: 'ആയുർവേദിക് & അഗ്രോ കെയർ',
+    category: 'Ayurvedic Care',
+    description: 'Specialized Ayurvedic wellness company known for Elements Wellness and On&On formulations backed by premier AYUSH Premium certified research.',
+    logoType: 'milifestyle',
+    highlights: ['Elements Wellness', 'On&On Health Drinks', 'IndiaAgro Solutions', 'Aahar Nutritional Range'],
+  },
+  {
+    rank: 6,
+    id: 'forever',
+    name: 'Forever Living Products',
+    sector: 'Aloe Vera based products',
+    malayalamSector: 'കറ്റാർവാഴ അധിഷ്ഠിത ഉൽപ്പന്നങ്ങൾ',
+    category: 'Health & Wellness',
+    description: 'The world’s largest grower and distributor of stabilized pure Aloe Vera gel drinks, bee honey products, natural skincare, and nutritional supplements.',
+    logoType: 'forever',
+    highlights: ['Forever Aloe Vera Gel', 'Bee Honey & Pollen', 'Aloe Propolis Creme', 'Garcinia Plus'],
+  },
+  {
+    rank: 7,
+    id: 'rcm',
+    name: 'RCM',
+    sector: 'FMCG & Groceries',
+    malayalamSector: 'നിത്യോപയോഗ സാധനങ്ങൾ & പലചരക്ക്',
+    category: 'FMCG & Groceries',
+    description: 'Extensive FMCG and grocery direct distribution network across India providing affordable daily cooking essentials, spices, health foods, and textiles.',
+    logoType: 'rcm',
+    highlights: ['Health Guard Rice Bran Oil', 'Nutricharge Supplements', 'Swechha Daily Spices', 'GoodDot Plant Proteins'],
+  },
+  {
+    rank: 8,
+    id: 'imc',
+    name: 'IMC',
+    sector: 'Ayurvedic Wellness',
+    malayalamSector: 'ആയുർവേദിക് വെൽനസ്',
+    category: 'Ayurvedic Care',
+    description: 'International Marketing Corporation delivering certified Organic Ayurvedic herbal healthcare, Shri Tulsi drops, Aloe dental care, and home protection.',
+    logoType: 'imc',
+    highlights: ['Shri Tulsi Drops', 'Himalayan Berry Juice', 'Aloe Jyoti Eye Drops', 'Ayurvedic Skin Care'],
+  },
+  {
+    rank: 9,
+    id: 'tupperware',
+    name: 'Tupperware India',
+    sector: 'Kitchen & Storage',
+    malayalamSector: 'കിച്ചൻ & സ്റ്റോറേജ് സൊല്യൂഷൻസ്',
+    category: 'FMCG & Groceries',
+    description: 'Iconic household brand famous for world-class food preservation, airtight smart storage containers, microwave cookware, and eco-friendly hydration bottles.',
+    logoType: 'tupperware',
+    highlights: ['Airtight Smart Containers', 'Aquasafe Bottles', 'Smart Kitchen Tools', 'Food Preparation Sets'],
+  },
+  {
+    rank: 10,
+    id: 'oriflame',
+    name: 'Oriflame',
+    sector: 'Beauty & Cosmetics',
+    malayalamSector: 'സൗന്ദര്യവർദ്ധക ഉൽപ്പന്നങ്ങൾ',
+    category: 'Beauty & Lifestyle',
+    description: 'Swedish beauty and cosmetics giant empowering entrepreneurs with nature-inspired skincare formulations, wellness supplements, fragrances, and color cosmetics.',
+    logoType: 'oriflame',
+    highlights: ['NovAge Anti-Aging', 'The ONE Cosmetics', 'Giordani Gold Fragrances', 'Wellness by Oriflame'],
   },
 ];
