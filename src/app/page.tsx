@@ -124,8 +124,8 @@ export default function HomePage() {
               <ScrollReveal direction="left" delay={300}>
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] w-full group">
                   <img
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
-                    alt="Sayana Charitable Society Community Members collaborating"
+                    src="/kerala_community_hero.jpg"
+                    alt="Sayana Charitable Society Kerala Community Empowerment Program with Easy Life Manager Packages"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#003527] via-[#003527]/30 to-transparent" />

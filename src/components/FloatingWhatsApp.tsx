@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { SITE_INFO } from '@/data/siteData';
 import { MessageSquare, X, Users, MessageCircle, Sparkles } from 'lucide-react';
 
@@ -40,19 +41,18 @@ export default function FloatingWhatsApp() {
           </p>
 
           <div className="space-y-2.5">
-            {/* Action 1: Official WhatsApp Group */}
-            <a
-              href={SITE_INFO.whatsappGroupLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            {/* Action 1: Official WhatsApp Group (Routes to Register) */}
+            <Link
+              href="/register"
+              onClick={() => setIsOpen(false)}
               className="w-full bg-[#fea619] hover:bg-[#855300] text-[#191c1d] hover:text-white font-bold text-xs p-3.5 rounded-xl transition-all duration-200 flex items-center gap-3 shadow-md group"
             >
               <Users className="w-4 h-4 text-[#191c1d] group-hover:text-white shrink-0" />
               <div className="text-left">
                 <span className="block font-bold">Join Official WhatsApp Group</span>
-                <span className="text-[10px] opacity-80 block">Connect with community members</span>
+                <span className="text-[10px] opacity-80 block">Register to unlock community group access</span>
               </div>
-            </a>
+            </Link>
 
             {/* Action 2: Direct Chat with Support */}
             <a

@@ -121,18 +121,18 @@ export default function AboutPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white">
+              <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white card-shadow-hover">
                 <img
-                  src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1000&q=80"
-                  alt="Community members in a workshop session"
-                  className="w-full h-full object-cover"
+                  src="/sayana_community_story.jpg"
+                  alt="Sayana Charitable Society Community Empowerment Gathering"
+                  className="w-full h-auto object-cover"
                 />
                 <div className="p-6 bg-[#003527] text-white">
                   <p className="font-heading font-bold text-lg text-[#fea619]">
-                    "Together We Rise"
+                    "Together We Rise • സംഘടിക്കുക ശക്തരാകുക"
                   </p>
-                  <p className="text-xs text-[#b0f0d6] mt-1">
-                    Structured programs designed to foster self-reliance, entrepreneurship, and dignity for every member.
+                  <p className="text-xs text-[#b0f0d6] mt-1 leading-relaxed">
+                    Sayana Charitable Society empowerment coordinators reviewing verified health & household products, milestone progression, and member support charters.
                   </p>
                 </div>
               </div>
