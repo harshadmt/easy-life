@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from 'next';
 import { Montserrat, Inter } from 'next/font/google';
+import React, { Suspense } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import AppPreloader from '@/components/AppPreloader';
+import NavigationProgress from '@/components/NavigationProgress';
+import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import './globals.css';
 
 const montserrat = Montserrat({
@@ -42,13 +46,19 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
+ClientNode?: never;
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${inter.variable} h-full scroll-smooth`}>
       <body className="min-h-screen flex flex-col bg-[#f8f9fa] text-[#191c1d] antialiased">
+        <AppPreloader />
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FloatingWhatsApp />
       </body>
     </html>
   );
