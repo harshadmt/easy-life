@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { SITE_INFO } from '@/data/siteData';
 import MottoBanner from '@/components/MottoBanner';
+import TopCompaniesShowcase from '@/components/TopCompaniesShowcase';
 import {
   Eye,
   Target,
@@ -199,6 +200,9 @@ export default function AboutPage() {
           </Link>
         </div>
       </section>
+
+      {/* TOP DIRECT SELLING COMPANIES IN INDIA (REGULATORY BENCHMARK) */}
+      <TopCompaniesShowcase />
     </div>
   );
 }

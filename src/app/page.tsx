@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { SITE_INFO, MEMBERSHIP_PLANS, ROADMAP_TIERS, PRODUCTS_LIST } from '@/data/siteData';
 import MottoBanner from '@/components/MottoBanner';
 import ScrollReveal from '@/components/ScrollReveal';
+import TopCompaniesShowcase from '@/components/TopCompaniesShowcase';
 import {
   Package,
   HandCoins,
@@ -535,7 +536,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. CALL TO ACTION SECTION */}
+      {/* 6. TOP DIRECT SELLING COMPANIES IN INDIA (ECOSYSTEM BENCHMARK) */}
+      <TopCompaniesShowcase />
+
+      {/* 7. CALL TO ACTION SECTION */}
       <section className="w-full bg-[#003527] py-16 sm:py-20 text-white relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#fea619]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
